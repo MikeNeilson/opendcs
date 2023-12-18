@@ -1,0 +1,17 @@
+name: 'Junit Report'
+description: 'Render Junit Reports into PR Comments'
+inputs:
+  repo-token:
+    description: 'GITHUB Token to allow writing comment.'
+    required: true
+  name:
+    description: 'Name of the Report. Defaults to junit-results. This is inserted as a header for finding and existing comment to replace the contents of.'
+    required: true
+    default: 'junit-results'
+  show-all:
+    description: 'Include elements for passing tests'
+    required: true
+    default: false # only show failed tests by default
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

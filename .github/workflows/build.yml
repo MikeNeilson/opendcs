@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: '8'
           distribution: temurin
-      - uses: actions/setup-python@v4.0.0
+      - uses: actions/setup-python@v5.0.0
         with:
           python-version: "3.8"
       - uses: actions/cache@v3.3.2
@@ -59,9 +59,9 @@ jobs:
       - name: Code Coverage
         run: |
           ant coverage.report
-      - name: Documentation and Create installer jar
-        run: |
-          ant opendcs
+      #- name: Documentation and Create installer jar
+      #  run: |
+      #    ant opendcs
       - name: Upload Test Results
         uses: actions/upload-artifact@v4.0.0
         if: success() || failure()
@@ -71,6 +71,11 @@ jobs:
             build/reports/**
             build/test-integration/**/tmp/configs**
             build/test-gui.webm
+      - name: Report results
+        if: success() || failure()  
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./.github/actions/junit-report
 #docker-images:
 #  runs-on: ubuntu-latest
 #  steps:
