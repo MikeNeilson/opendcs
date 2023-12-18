@@ -16,11 +16,11 @@ try
 
     const context: Context = github.context;
     const token: string = core.getInput('repo-token');
-    const reportName: String = core.getInput('report-name');
+    const reportName: String = core.getInput('name');
     const octokit: any = github.getOctokit(token);
     core.info("Hello from junit report");
 
-    let reportText: String = "#" + reportName + "\n";
+    let reportText: String = "# " + reportName + "\n\n";
     reportText = reportText + 'Hello from action running on ' + process.platform;
 
     octokit.rest.issues.createComment(

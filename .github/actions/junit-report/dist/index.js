@@ -31249,10 +31249,10 @@ try {
     }
     const context = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
     const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('repo-token');
-    const reportName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('report-name');
+    const reportName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('name');
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.info("Hello from junit report");
-    let reportText = "#" + reportName + "\n";
+    let reportText = "# " + reportName + "\n\n";
     reportText = reportText + 'Hello from action running on ' + process.platform;
     octokit.rest.issues.createComment({
         issue_number: context.issue.number,
