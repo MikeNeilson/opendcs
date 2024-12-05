@@ -43,7 +43,7 @@ jobs:
           ./gradlew distTar distZip
       - name: create docker images
         run: |
-          ./build_docker.sh ghcr.io/${{github.event.repository.owner.name}} ${{inputs.branch}}-nightly
+          ./build_docker.sh ghcr.io/${{github.repository_name}} ${{inputs.branch}}-nightly
       - name: upload Release
         env: 
             GH_TOKEN: "${{ secrets.token != null && secrets.token || secrets.GITHUB_TOKEN }}"
@@ -59,8 +59,8 @@ jobs:
           password: ${{ secrets.token != null && secrets.token || secrets.GITHUB_TOKEN }}
       - name: Push images
         run: |
-          docker push ghcr.io/${{github.event.repository.owner.name}}/lrgs:${{inputs.branch}}-nightly
-          docker push ghcr.io/${{github.event.repository.owner.name}}/routingscheduler:${{inputs.branch}}-nightly
-          docker push ghcr.io/${{github.event.repository.owner.name}}/compdepends:${{inputs.branch}}-nightly
-          docker push ghcr.io/${{github.event.repository.owner.name}}/compproc:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.repository_name}}/lrgs:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.repository_name}}/routingscheduler:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.repository_name}}/compdepends:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.repository_name}}/compproc:${{inputs.branch}}-nightly
       
