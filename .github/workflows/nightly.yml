@@ -45,8 +45,7 @@ jobs:
         run: |
           ./build_docker.sh ghcr.io/${{github.event.repository.owner.name}} ${{inputs.branch}}-nightly
       - name: upload Release
-        with:
-          env: 
+        env: 
             GH_TOKEN: "${{ secrets.token != null && secrets.token || secrets.GITHUB_TOKEN }}"
         run: |
           VERSION=`./gradlew properties -q | grep "^version:" | awk '{ print $2}'`
