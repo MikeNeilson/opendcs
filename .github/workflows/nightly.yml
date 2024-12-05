@@ -16,6 +16,7 @@ on:
         description: Which Branch to make the build from
         options:
           - main
+          - main-fork
 
 jobs:
   tests:
@@ -42,8 +43,11 @@ jobs:
           ./gradlew distTar distZip
       - name: create docker images
         run: |
-          ./build_docker.sh ghcr.io/opendcs ${{inputs.branch}}-nightly
+          ./build_docker.sh ghcr.io/${{github.event.repository.owner.name}} ${{inputs.branch}}-nightly
       - name: upload Release
+        with:
+          env: 
+            GH_TOKEN: "${{ secrets.token != null && secrets.token || secrets.GITHUB_TOKEN }}"
         run: |
           VERSION=`./gradlew properties -q | grep "^version:" | awk '{ print $2}'`
           gh release upload ${{inputs.branch}}-nightly install/build/distributions/${VERSION}.tar#opendcs-${{inputs.branch}}-nightly.tar --clobber
@@ -56,8 +60,8 @@ jobs:
           password: ${{ secrets.token != null && secrets.token || secrets.GITHUB_TOKEN }}
       - name: Push images
         run: |
-          docker push ghcr.io/opendcs/lrgs:${{inputs.branch}}-nightly
-          docker push ghcr.io/opendcs/routingscheduler:${{inputs.branch}}-nightly
-          docker push ghcr.io/opendcs/compdepends:${{inputs.branch}}-nightly
-          docker push ghcr.io/opendcs/compproc:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.event.repository.owner.name}}/lrgs:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.event.repository.owner.name}}/routingscheduler:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.event.repository.owner.name}}/compdepends:${{inputs.branch}}-nightly
+          docker push ghcr.io/${{github.event.repository.owner.name}}/compproc:${{inputs.branch}}-nightly
       
