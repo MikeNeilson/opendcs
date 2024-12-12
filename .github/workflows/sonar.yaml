@@ -56,4 +56,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew sonar --info -Dorg.gradle.jvmargs=-Xmx4096M
+        run: |
+         ./gradlew sonar --info -Dorg.gradle.jvmargs=-Xmx4096M \
+            -Psonar.scm.revision=${{ github.event.workflow_run.head_sha }} \
+            -Psonar.pullrequest.key=${{ github.event.workflow_run.pull_requests[0].number }} \
+            -Psonar.pullrequest.branch=${{ github.event.workflow_run.pull_requests[0].head.ref }} \
+            -Psonar.pullrequest.base=${{ github.event.workflow_run.pull_requests[0].base.ref }}
