@@ -70,7 +70,7 @@ jobs:
         run: |
           ./gradlew :testing:opendcs-tests:test -P"opendcs.test.engine=CWMS-Oracle" --info
       - name: Upload Coverage
-        if: matrix.platform == 'ubuntu-latest' && matrix.jdk = 17
+        if: matrix.platform == 'ubuntu-latest' && matrix.jdk == 17
         uses: actions/upload-artifact@v4.4.3
         with:
           name: coverage
