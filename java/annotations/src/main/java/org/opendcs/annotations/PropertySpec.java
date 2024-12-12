@@ -40,7 +40,7 @@ public @interface PropertySpec
       */
     String propertySpecType() default "";
     /**
-      * Set the default value.
+      * Set the default value. Small tweak.
       */
     String description() default "";
 }
