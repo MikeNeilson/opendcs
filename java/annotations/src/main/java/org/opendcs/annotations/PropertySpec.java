@@ -35,6 +35,9 @@ public @interface PropertySpec
      * @return
      */
     String value() default "";
+    /**
+      * Data Type (double, int, string, etc) of the given property
+      */
     String propertySpecType() default "";
     String description() default "";
 }
