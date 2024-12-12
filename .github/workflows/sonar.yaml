@@ -11,7 +11,7 @@ on:
 jobs:
   Sonar:
     runs-on: ubuntu-latest
-    if: github.event.workflow_run && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    if: github.event.workflow_run && github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Set up JDK
         uses: actions/setup-java@v4.4.0
