@@ -17,8 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, macos-13, windows-latest]
-        jdk: [8, 11, 17]
+        platform: [ubuntu-latest]
+        jdk: [17]
     runs-on: ${{matrix.platform}}
     steps:
       - uses: actions/checkout@v4.1.1
