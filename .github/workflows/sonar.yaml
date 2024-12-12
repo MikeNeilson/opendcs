@@ -47,6 +47,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
+          path: ./
+          merge-multiple: true
       - name: Show jacoco files
         run : |
           find . -name "jacoco*.xml" -type f
