@@ -35,6 +35,12 @@ public @interface PropertySpec
      * @return
      */
     String value() default "";
+    /**
+      * Data Type (double, int, string, etc) of the given property
+      */
     String propertySpecType() default "";
+    /**
+      * Set the default value. Small tweak... again... again.
+      */
     String description() default "";
 }
